@@ -1,4 +1,3 @@
-// import React, { Component } from "react";
 import { useState, useRef } from "react";
 import { connect } from "react-redux";
 import contactAction from "../../redux/actions";

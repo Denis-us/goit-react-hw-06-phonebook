@@ -3,14 +3,16 @@ import { connect } from "react-redux";
 import deleteItem from "../../redux/actions";
 import PhoneBookItem from "../PhonebookItem/PhonebookItem";
 import PropTypes from "prop-types";
+import styles from "./PhonebookList.module.css";
 
 const PhonebookList = ({ contacts, title, onDeleteList }) => {
   return (
     <div>
-      <h2>{title}</h2>
-      <ul>
+      <h2 className={styles.title}>{title}</h2>
+      <ul className={styles.list}>
         {contacts.map(({ id, name, number }) => (
           <PhoneBookItem
+            className={styles.listEl}
             key={id}
             name={name}
             number={number}

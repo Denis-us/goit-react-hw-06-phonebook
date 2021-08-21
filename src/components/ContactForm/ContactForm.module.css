@@ -1,0 +1,16 @@
+.form {
+  width: 280px;
+  display: flex;
+  flex-direction: column;
+}
+
+.formItem {
+  margin: 10px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.button {
+  margin: 10px;
+  width: 100px;
+}
