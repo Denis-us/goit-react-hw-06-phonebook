@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 import { v4 as uuidv4 } from "uuid";
 import styles from "./ContactForm.module.css";
 
-function Input({ onFormSubmit }) {
+function Input({ onFormSubmit, contacts }) {
   const [name, setName] = useState("");
   const [number, setNumber] = useState("");
   const contactId = useRef(uuidv4());
@@ -28,6 +28,12 @@ function Input({ onFormSubmit }) {
 
   const addContact = (e) => {
     e.preventDefault();
+    const newContact = contacts.some((contact) => contact.name === name);
+    if (newContact) {
+      alert(`${name} is already in contacts`);
+      formReset();
+      return;
+    }
 
     onFormSubmit({ name: name, number: number, contactId: contactId });
     formReset();
@@ -73,11 +79,15 @@ function Input({ onFormSubmit }) {
   );
 }
 
+const mapStateToProps = (state) => ({
+  contacts: state.contacts.items,
+});
+
 const mapDispatchToProps = (dispatch) => ({
   onFormSubmit: (data) => dispatch(contactAction.addContact(data)),
 });
 
-export default connect(null, mapDispatchToProps)(Input);
+export default connect(mapStateToProps, mapDispatchToProps)(Input);
 
 Input.propTypes = {
   onFormSubmit: PropTypes.func.isRequired,
